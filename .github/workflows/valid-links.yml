@@ -32,5 +32,6 @@ jobs:
           fi
 
           for file in $files; do
+              echo $file
               markdown-link-check -q -c .github/markdown-link-check-config.json $file
           done
