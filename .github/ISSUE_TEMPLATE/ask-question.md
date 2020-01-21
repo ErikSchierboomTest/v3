@@ -13,7 +13,7 @@ assignees: ""
 - The language this question applies to (e.g. Ruby).
 - The exercise this question applies to (e.g. two-fer).
 - If this relates to another issue, please link to that issue.
-- Etc.]
+- Etc.]we
 
 [issues-open]: ./
 [issues-closed]: ./?q=is%3Aissue+is%3Aclosed
