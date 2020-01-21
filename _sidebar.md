@@ -1,6 +1,6 @@
 - [Start here](/)
 - Docs
-  - [Concept Exercises](/docs/concept-exercises.md)
+  - [Concept Exercises](/docs/concept-exercises.mdddd)
   - [The features of v3](/docs/features-of-v3.md)
   - [Rationale for v3](/docs/rationale-for-v3.md)
   - [Docs for Maintainers](/docs/maintainers/README.md)
