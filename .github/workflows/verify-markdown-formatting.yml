@@ -17,8 +17,6 @@ jobs:
 
       - name: "Verify Markdown formatting"
         run: |
-          echo "GITHUB_REF: $GITHUB_REF"
-
           if [ "$GITHUB_REF" == "refs/heads/master" ]; then
             echo "Checking the formatting of all Markdown files in this repository"
             npx prettier@2.0.4 --check "**/*.md"
