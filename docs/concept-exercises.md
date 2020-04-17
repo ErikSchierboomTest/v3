@@ -9,10 +9,6 @@ By concepts we mean things that a programmer would need to understand to be flue
 - If someone learnt Ruby, and someone learnt Haskell, what are the things that the two people learnt that are different?
 - If a Ruby programmer learnt Haskell, what new concepts would they have to learn, what knowledge would they have to disregard, and what syntax would they have to remap?
 
-
-
-
-
 By teaching concepts we aim to teach fluency.
 
 ## What do we mean by "fluency?"
