@@ -19,7 +19,6 @@ jobs:
         run: |
           if [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
             echo "Checking the formatting of all added or modified Markdown files in this PR"
-
             PULL_REQUEST_FILES_URL="${jq -r ".pull_request.url" "$GITHUB_EVENT_PATH"}/files"
             curl --url $PULL_REQUEST_FILES_URL --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
               jq -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".md$")) | .filename' | \
