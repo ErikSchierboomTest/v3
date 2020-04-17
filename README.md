@@ -8,6 +8,9 @@ Exercism v3 is the third major iteration of Exercism, which we are aiming to lau
 
 A summary of the main featuressss:
 
+
+
+
 - **Restructured tracks:** We are restructuring tracks to build new pathways containing Concept Exercises. These exercises will teach the key concepts that someone needs to know when learning a language. Completing a Concept Exercise will unlock other Concept and Practice Exercises. Concept Exercises will have automated feedback and approval, with no delays waiting for a mentor.
 - **Approaches:** We will be automatically grouping similar solutions to Practice Exercises into Approaches. These will be supported with community-sourced articles expounding each approach, discussing its pros, cons, and potential usages.
 - **In-browser coding:** We will be adding the ability to solve exercises within the browser. The CLI will remain as a first-class citizen, but v3 will allow people to work their way through a track without having to install anything.
