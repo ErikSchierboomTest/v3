@@ -11,4 +11,6 @@ public static class AssemblyLine
     {
         throw new NotImplementedException("Please implement the AssemblyLine.WorkingItemsPerMinute method");
     }
+
+
 }

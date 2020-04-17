@@ -1,37 +1,53 @@
-name: "Verify Markdown formatting"
+name: "Verify C# formatting"
 
 on:
   push:
     paths:
-      - "**.md"
+      - "languages/csharp/exercise/**/*.cs"
   pull_request:
     paths:
-      - "**.md"
+      - "languages/csharp/exercise/**/*.cs"
 
 jobs:
-  verify-markdown-for-repository:
+  verify-csharp-for-repository:
     if: github.ref == 'refs/heads/master'
     runs-on: [ubuntu-latest]
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v2
 
-      - name: "Verify Markdown formatting"
-        run: npx prettier@2.0.4 --check "**/*.md"
+      - name: "Install .NET core"
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "3.1.201"
 
-  verify-markdown-for-pr:
+      - name: "Verify C# formatting"
+        run: |
+          dotnet tool install -g dotnet-format
+          dotnet format --check -f ./languages/csharp/exercises
+
+  verify-csharp-for-pr:
     if: github.ref != 'refs/heads/master' && github.event.pull_request.url
     runs-on: [ubuntu-latest]
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v2
 
-      - name: "Verify Markdown formatting"
+      - name: "Install .NET core"
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "3.1.201"
+
+      - name: "Install dotnet format tool"
+        run: |
+          dotnet tool install -g dotnet-format
+
+      - name: "Verify C# formatting"
         run: |
           PULL_REQUEST_URL=$(jq -r ".pull_request.url" "$GITHUB_EVENT_PATH")
           curl --url $"${PULL_REQUEST_URL}/files" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | \
-            jq -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".md$")) | .filename' | \
-            xargs npx prettier@2.0.4 --write
+            jq -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
+            xargs dotnet format --check --files
 
   # https://github.community/t5/GitHub-Actions/Workflow-is-failing-if-no-job-can-be-ran-due-to-condition/m-p/38186#M3250
   always_job:
