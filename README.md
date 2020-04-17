@@ -10,7 +10,7 @@ A summary of the main features are:
 
 - # **Restructured tracksssss:** We are restructuring tracks to build new pathways containing Concept Exercises. These exercises will teach the key concepts that someone needs to know when learning a language. Completing a Concept Exercise will unlock other Concept and Practice Exercises. Concept Exercises will have automated feedback and approval, with no delays waiting for a mentor.
 
-  A summary of the main featuressss:
+  A summary of the main features:
 
 - **Restructured tracks:** We are restructuring tracks to build new pathways containing Concept Exercises. These exercises will teach the key concepts that someone needs to know when learning a language. Completing a Concept Exercise will unlock other Concept and Practice Exercises. Concept Exercises will have automated feedback and approval, with no delays waiting for a mentor.
   > > > > > > > origin/master
