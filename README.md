@@ -18,7 +18,7 @@ A summary of the main featuressss:
 A summary of the main features are:
 >>>>>>> Test commit
 
-- **Restructured tracks:** We are restructuring tracks to build new pathways containing Concept Exercises. These exercises will teach the key concepts that someone needs to know when learning a language. Completing a Concept Exercise will unlock other Concept and Practice Exercises. Concept Exercises will have automated feedback and approval, with no delays waiting for a mentor.
+- **Restructured tracksssss:** We are restructuring tracks to build new pathways containing Concept Exercises. These exercises will teach the key concepts that someone needs to know when learning a language. Completing a Concept Exercise will unlock other Concept and Practice Exercises. Concept Exercises will have automated feedback and approval, with no delays waiting for a mentor.
 - **Approaches:** We will be automatically grouping similar solutions to Practice Exercises into Approaches. These will be supported with community-sourced articles expounding each approach, discussing its pros, cons, and potential usages.
 - **In-browser coding:** We will be adding the ability to solve exercises within the browser. The CLI will remain as a first-class citizen, but v3 will allow people to work their way through a track without having to install anything.
 - **Improved profiles:** Profiles will be getting an upgrade - with contributions throughout the site reflected in them. Mentoring, writing exercises, contributing to tracks, and maintaining parts of Exercism will all feature on profiles. Over time, contributing more will also have tangible improvements to your experience, with bumps up mentor queues and access to early testing features.
