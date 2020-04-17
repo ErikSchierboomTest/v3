@@ -8,6 +8,8 @@
 
 ## Markdown formatting
 
+
+
 The formatting of all Markdown files is automatically checked against the Markdown formatting used by [prettier][prettier].
 
 ## Concept CI
