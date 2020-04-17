@@ -18,4 +18,5 @@ jobs:
       - name: "Verify Markdown formatting"
         run: |
           cat $GITHUB_EVENT_PATH
+          echo $GITHUB_EVENT_NAME
           npx prettier@2.0.4 --check "**/*.md"
