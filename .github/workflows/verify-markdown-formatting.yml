@@ -23,9 +23,8 @@ jobs:
             echo "Checking the formatting of all Markdown files in this repository"
             npx prettier@2.0.4 --check "**/*.md"
           else
-          echo "Checking the formatting of all added or modified Markdown files in this PR"
-            PULL_REQUEST_FILES_URL="${PULL_REQUEST_URL}/files"
-            curl --url $PULL_REQUEST_FILES_URL --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            echo "Checking the formatting of all added or modified Markdown files in this PR"
+            curl --url $"${PULL_REQUEST_URL}/files" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
               jq -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".md$")) | .filename' | \
               xargs npx prettier --write
           fi
