@@ -17,6 +17,8 @@ jobs:
 
       - name: "Verify Markdown formatting"
         run: |
+          jq -r ".pull_request.url" "$GITHUB_EVENT_PATH"
+
           if [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
             echo "Checking the formatting of all added or modified Markdown files in this PR"
             PULL_REQUEST_FILES_URL="${jq -r ".pull_request.url" "$GITHUB_EVENT_PATH"}/files"
