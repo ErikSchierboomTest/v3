@@ -18,13 +18,13 @@ jobs:
       - name: "Verify Markdown formatting"
         run: |
           if [ "$GITHUB_EVENT_NAME" == "pull_request" ]; then
-            PULL_REQUEST_FILES_URL="${jq -r ".pull_request.url" "$GITHUB_EVENT_PATH"}/files"
+            echo "Checking the formatting of all added or modified Markdown files in this PR"
 
-            # Check the formatting of all added or modified Markdown files in the PR
+            PULL_REQUEST_FILES_URL="${jq -r ".pull_request.url" "$GITHUB_EVENT_PATH"}/files"
             curl --url $PULL_REQUEST_FILES_URL --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
               jq -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".md$")) | .filename' | \
               xargs npx prettier --write
           else
-            # Check the formatting of all Markdown files in the repository
+            echo "Checking the formatting of all Markdown files in this repository"
             npx prettier@2.0.4 --check "**/*.md"
           fi
