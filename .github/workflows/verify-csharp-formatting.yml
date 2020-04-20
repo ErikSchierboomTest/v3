@@ -9,8 +9,7 @@ on:
       - "languages/csharp/exercises/**/*.cs"
 
 jobs:
-  verify-csharp-for-repository:
-    if: github.ref == 'refs/heads/master'
+  verify-csharp-formatting:
     runs-on: [ubuntu-latest]
     steps:
       - name: "Checkout code"
@@ -21,39 +20,18 @@ jobs:
         with:
           dotnet-version: "3.1.201"
 
-      - name: "Verify C# formatting"
-        run: |
-          dotnet tool install -g dotnet-format
-          dotnet format --check -f ./languages/csharp/exercises
+      - name: "Install dotnet-format tool"
+        run: dotnet tool install -g dotnet-format
 
-  verify-csharp-for-pr:
-    if: github.ref != 'refs/heads/master' && github.event.pull_request.url
-    runs-on: [ubuntu-latest]
-    steps:
-      - name: "Checkout code"
-        uses: actions/checkout@v2
+      - name: "Verify C# formatting of all C# files"
+        if: github.ref == 'refs/heads/master'
+        run: dotnet format --check -f ./languages/csharp/exercises
 
-      - name: "Install .NET core"
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: "3.1.201"
-
-      - name: "Install dotnet format tool"
-        run: |
-          dotnet tool install -g dotnet-format
-
-      - name: "Verify C# formatting"
+      - name: "Verify C# formatting of the PR's C# files"
+        if: github.ref != 'refs/heads/master' && github.event.pull_request.url
         run: |
           PULL_REQUEST_URL=$(jq -r ".pull_request.url" "$GITHUB_EVENT_PATH")
           curl --url $"${PULL_REQUEST_URL}/files" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | \
             jq -r -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
             paste -s -d, - | \
             xargs dotnet format --check -f . --files
-
-  # https://github.community/t5/GitHub-Actions/Workflow-is-failing-if-no-job-can-be-ran-due-to-condition/m-p/38186#M3250
-  always_job:
-    name: Always run job
-    runs-on: ubuntu-latest
-    steps:
-      - name: Always run
-        run: echo "This job is used to prevent the workflow to fail when all other jobs are skipped."
