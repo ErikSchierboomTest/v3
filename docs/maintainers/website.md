@@ -3,7 +3,7 @@
 The contents of this repository can also be viewed using
 [a website with easier navigation][website]. The website is built using [docsify][docsify].
 
-## Running locally with docker
+## Running locally with Docker
 
 You need to have docker installed for your platform.
 
