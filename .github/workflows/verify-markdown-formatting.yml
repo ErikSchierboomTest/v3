@@ -9,13 +9,13 @@ on:
       - "**.md"
 
 jobs:
-  verify-markdown-for:
+  verify-markdown-formatting:
     runs-on: [ubuntu-latest]
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v2
 
-      - name: "Verify Markdown formatting of all repository files"
+      - name: "Verify Markdown formatting of all files"
         if: github.ref == 'refs/heads/master'
         run: npx prettier@2.0.4 --check "**/*.md"
 
