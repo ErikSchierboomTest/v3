@@ -45,8 +45,9 @@ jobs:
 
           # Use dotnet format to format the added or modified C# files in the PR (if any)
           curl --url "${PULL_REQUEST_URL}/files" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | \
-            jq -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
-            xargs dotnet format --files
+            jq -r -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
+            paste -s -d, - | \
+            xargs dotnet format -f . --files
 
           # Check if there is nothing to commit (i.e. no formatting changes made)
           if [ -z "$(git status --porcelain)" ]; then 

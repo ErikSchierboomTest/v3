@@ -3,10 +3,10 @@ name: "Verify C# formatting"
 on:
   push:
     paths:
-      - "languages/csharp/exercise/**/*.cs"
+      - "languages/csharp/exercises/**/*.cs"
   pull_request:
     paths:
-      - "languages/csharp/exercise/**/*.cs"
+      - "languages/csharp/exercises/**/*.cs"
 
 jobs:
   verify-csharp-for-repository:
@@ -46,8 +46,9 @@ jobs:
         run: |
           PULL_REQUEST_URL=$(jq -r ".pull_request.url" "$GITHUB_EVENT_PATH")
           curl --url $"${PULL_REQUEST_URL}/files" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | \
-            jq -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
-            xargs dotnet format --check --files
+            jq -r -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
+            paste -s -d, - | \
+            xargs dotnet format --check -f . --files
 
   # https://github.community/t5/GitHub-Actions/Workflow-is-failing-if-no-job-can-be-ran-due-to-condition/m-p/38186#M3250
   always_job:
