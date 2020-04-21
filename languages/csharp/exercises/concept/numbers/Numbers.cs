@@ -2,7 +2,7 @@ using System;
 
 public static class AssemblyLine
 {
-    public static double ProductionRatePerHour(int speed)
+    public static   double   ProductionRatePerHour(int speed)
     {
         throw   new    NotImplementedException("Please implement the AssemblyLine.ProductionRatePerHour method");
     }
