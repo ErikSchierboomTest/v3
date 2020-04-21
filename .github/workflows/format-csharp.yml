@@ -34,6 +34,8 @@ jobs:
 
       - name: "Format C# code"
         run: |
+          echo $PULL_REQUEST
+
           # Use dotnet format to format the added or modified C# files in the PR (if any)
           curl --url $(jq -r '.issue.pull_request.url | . += "-files"' "$PULL_REQUEST") --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | \
             jq -r -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
