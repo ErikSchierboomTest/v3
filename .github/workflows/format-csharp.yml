@@ -24,6 +24,7 @@ jobs:
       - name: "Checkout PR"
         run: |
           export PULL_REQUEST="/tmp/pr.json"
+          echo "::set-env name=PULL_REQUEST::$PULL_REQUEST"
           curl --url $(jq -r ".issue.pull_request.url" "$GITHUB_EVENT_PATH") --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -o "$PULL_REQUEST"
 
           HEAD_REF=$(jq -r ".head.ref" "$PULL_REQUEST")
