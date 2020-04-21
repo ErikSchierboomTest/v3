@@ -1,8 +1,8 @@
 using System;
 
-public static class SavingsAccount
+public static   class    SavingsAccount
 {
-    public static float InterestRate(decimal balance)
+    public static    float   InterestRate(decimal balance)
     {
 
 
