@@ -25,7 +25,7 @@ jobs:
         run: |
           HEAD_REF=$( \
             jq -r ".issue.pull_request.url" "$GITHUB_EVENT_PATH" | \
-            xargs --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | \
+            xargs --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' --url | \
             jq -r ".head.ref" "$PULL_REQUEST")
 
           git branch -vv
