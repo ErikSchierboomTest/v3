@@ -28,18 +28,15 @@ jobs:
             xargs curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' --url | \
             jq -r ".head.ref")
 
-          git branch -vv
-
           # Checkout the PR branch, as issue workflows have the repo's default branch checked out
           git fetch origin "$HEAD_REF"
           git checkout -b "$HEAD_REF" "origin/$HEAD_REF"
 
       - name: "Format C# code"
         run: |
-          PULL_REQUEST_URL=$(jq -r ".issue.pull_request.url" "$GITHUB_EVENT_PATH")
-
           # Use dotnet format to format the added or modified C# files in the PR (if any)
-          curl --url "${PULL_REQUEST_URL}/files" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | \
+          jq -r '.issue.pull_request.url | . += "-files"' "$GITHUB_EVENT_PATH" | \
+            xargs curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' --url | \
             jq -r -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
             paste -s -d, - | \
             xargs dotnet format -f . --files
