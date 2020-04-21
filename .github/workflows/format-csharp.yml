@@ -23,10 +23,10 @@ jobs:
 
       - name: "Checkout PR"
         run: |
-          HEAD_REF=$( \
-            jq -r ".issue.pull_request.url" "$GITHUB_EVENT_PATH" | \
-            xargs curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' --url | \
-            jq -r ".head.ref")
+          export PULL_REQUEST="/tmp/pr.json"
+          curl --url $(jq -r ".issue.pull_request.url" "$GITHUB_EVENT_PATH") --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -o "$PULL_REQUEST"
+
+          HEAD_REF=jq -r ".head.ref" "$PULL_REQUEST"
 
           # Checkout the PR branch, as issue workflows have the repo's default branch checked out
           git fetch origin "$HEAD_REF"
@@ -35,10 +35,7 @@ jobs:
       - name: "Format C# code"
         run: |
           # Use dotnet format to format the added or modified C# files in the PR (if any)
-          jq -r ".issue.pull_request.url" "$GITHUB_EVENT_PATH" | \
-            xargs curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' --url | \
-            jq -r '.issue.pull_request.url | . += "-files"' "$GITHUB_EVENT_PATH" | \
-            xargs curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' --url | \
+          curl --url $(jq -r '.issue.pull_request.url | . += "-files"' "$PULL_REQUEST") --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' | \
             jq -r -c '.[] | select(.status == "added" or .status == "modified") | select(.filename | match(".cs$")) | .filename' | \
             paste -s -d, - | \
             xargs dotnet format -f . --files
