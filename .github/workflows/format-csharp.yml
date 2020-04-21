@@ -25,7 +25,8 @@ jobs:
         run: |
           HEAD_REF=$( \
             jq -r ".issue.pull_request.url" "$GITHUB_EVENT_PATH" | \
-            xargs curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' --url)
+            xargs curl --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' --url | \
+            jq -r ".head.ref")
 
           # Checkout the PR branch, as issue workflows have the repo's default branch checked out
           git fetch origin "$HEAD_REF"
