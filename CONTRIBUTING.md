@@ -1,4 +1,4 @@
-# Contributing
+# Contributing (DO NOT MERGE THIS!)
 
 Thanks for wanting to contribute Exercism v3! Contributions are very welcome.
 
